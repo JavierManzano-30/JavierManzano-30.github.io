@@ -523,58 +523,32 @@ section {
 }
 
 .video-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     border-radius: 12px;
-    overflow: hidden;
+    padding: 1.5rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .video-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.2);
 }
 
-.video-thumbnail {
-    height: 200px;
-    background: linear-gradient(135deg, #333 0%, #000 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.video-thumbnail i {
-    font-size: 4rem;
-    color: #ff0000;
-    opacity: 0.9;
-}
-
-.video-thumbnail::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-}
-
-.video-info {
-    padding: 1.5rem;
-}
-
-.video-info h4 {
+.video-card h4 {
     font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     color: white;
+    font-weight: 600;
 }
 
-.video-info p {
-    color: rgba(255, 255, 255, 0.8);
+.video-card p {
+    color: rgba(255, 255, 255, 0.85);
     margin-bottom: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 .video-views {
@@ -583,6 +557,11 @@ section {
     gap: 0.5rem;
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.video-views i {
+    font-size: 0.8rem;
 }
 
 .subscribe-box {
