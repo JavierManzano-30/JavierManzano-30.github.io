@@ -17,8 +17,9 @@ const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 
 navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+    const isActive = navMenu.classList.toggle('active');
     navToggle.classList.toggle('active');
+    navToggle.setAttribute('aria-expanded', isActive);
 });
 
 // Close mobile menu when clicking on a link
@@ -26,6 +27,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
     });
 });
 
@@ -33,11 +35,11 @@ document.querySelectorAll('.nav-link').forEach(link => {
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        navbar.style.background = 'rgba(14, 15, 18, 0.85)';
+        navbar.style.borderBottomColor = 'rgba(77, 163, 255, 0.2)';
     } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = 'none';
+        navbar.style.background = 'rgba(14, 15, 18, 0.7)';
+        navbar.style.borderBottomColor = 'rgba(255, 255, 255, 0.18)';
     }
 });
 
@@ -57,10 +59,10 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
-    // Add animation classes to elements
-    const animateElements = document.querySelectorAll('.skill-category, .project-card, .stat, .about-text, .video-card, .subscribe-box');
+    // Add animation classes to elements for scroll reveal
+    const animateElements = document.querySelectorAll('.skill-category, .project-card, .stat, .about-content, .video-card, .subscribe-box, .contact-content, .youtube-hero');
     animateElements.forEach(el => {
-        el.classList.add('fade-in');
+        el.classList.add('slide-up');
         observer.observe(el);
     });
 

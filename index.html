@@ -9,8 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    
     <!-- Navigation -->
-    <nav class="navbar">
+    <header role="banner">
+        <nav class="navbar" aria-label="Navegación principal">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="#home">JManzanoO</a>
@@ -24,14 +27,16 @@
                 <a href="#contact" class="nav-link">Contacto</a>
                 <a href="mascosas.html" class="nav-link">Más cosas</a>
             </div>
-            <div class="nav-toggle" id="nav-toggle">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </nav>
+    </header>
 
+    <main id="main-content">
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-container">
@@ -198,11 +203,11 @@
             <h2 class="section-title">Proyectos Destacados</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-placeholder">
+                    <figure class="project-image">
+                        <div class="project-placeholder" aria-hidden="true">
                             <i class="fas fa-laptop-code"></i>
                         </div>
-                    </div>
+                    </figure>
                     <div class="project-content">
                         <h3>E-commerce Platform</h3>
                         <p>Plataforma de comercio electrónico completa con carrito de compras, pagos integrados y panel de administración.</p>
@@ -218,11 +223,11 @@
                     </div>
                 </div>
                 <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-placeholder">
+                    <figure class="project-image">
+                        <div class="project-placeholder" aria-hidden="true">
                             <i class="fas fa-mobile-alt"></i>
                         </div>
-                    </div>
+                    </figure>
                     <div class="project-content">
                         <h3>App Móvil de Tareas</h3>
                         <p>Aplicación móvil para gestión de tareas con sincronización en tiempo real y notificaciones push.</p>
@@ -238,11 +243,11 @@
                     </div>
                 </div>
                 <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-placeholder">
+                    <figure class="project-image">
+                        <div class="project-placeholder" aria-hidden="true">
                             <i class="fas fa-chart-line"></i>
                         </div>
-                    </div>
+                    </figure>
                     <div class="project-content">
                         <h3>Dashboard Analytics</h3>
                         <p>Dashboard interactivo para análisis de datos con gráficos dinámicos y reportes personalizables.</p>
@@ -282,9 +287,9 @@
                             <i class="fab fa-youtube"></i> Visitar Canal
                         </a>
                     </div>
-                    <div class="youtube-placeholder">
-                        <img src="Youtube.png" alt="Mi Canal de Parkour">
-                    </div>
+                    <figure class="youtube-placeholder">
+                        <img src="Youtube.png" alt="Mi Canal de Parkour" loading="lazy">
+                    </figure>
                 </div>
                 
                 <div class="videos-grid">
@@ -365,9 +370,10 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <p>&copy; 2025 JManzanoO. Todos los derechos reservados.</p>
         </div>
