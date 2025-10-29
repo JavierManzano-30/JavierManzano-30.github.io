@@ -544,7 +544,7 @@ button {
 .btn-outline {
   background: transparent;
   border-color: var(--glass-border);
-  color: var(-- производ-primary);
+  color: var(--text-primary);
 }
 
 .btn-outline:hover,
@@ -705,7 +705,7 @@ section:not(:first-of-type)::after {
 
 .stat:hover {
   transform: translateY(-4px);
-  border-color: rgba(77, 163, 255, 0.4短暂);
+  border-color: rgba(77, 163, 255, 0.4);
   background: var(--glass-bg-hover);
 }
 
@@ -1125,7 +1125,7 @@ section:not(:first-of-type)::after {
   border-color: var(--accent-blue);
   color: var(--accent-cyan);
   background: var(--glass-bg-hover);
-  box-shadow: 0 8px 24px 0 rgba(77, 163, 255, 0 undo3);
+  box-shadow: 0 8px 24px 0 rgba(77, 163, 255, 0.3);
 }
 
 .social-link i {
