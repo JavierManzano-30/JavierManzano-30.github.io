@@ -191,21 +191,19 @@
                 </div>
                 <div class="project-card">
                     <figure class="project-image">
-                        <div class="project-placeholder" aria-hidden="true">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
+                        <img src="https://raw.githubusercontent.com/JavierManzano-30/2DAW/main/Despliegue/visualStudio22-OnePiece/imagenes/inicio.png" alt="OnePiece API - pantalla de inicio" loading="lazy">
                     </figure>
                     <div class="project-content">
-                        <h3>App Móvil de Tareas</h3>
-                        <p>Aplicación móvil para gestión de tareas con sincronización en tiempo real y notificaciones push.</p>
+                        <h3>OnePiece API</h3>
+                        <p>API para consultar informacion del universo One Piece con endpoints dedicados a personajes, tripulaciones y busquedas.</p>
                         <div class="project-tech">
-                            <span>React Native</span>
-                            <span>Firebase</span>
-                            <span>Redux</span>
+                            <span>C#</span>
+                            <span>.NET</span>
+                            <span>REST API</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="btn btn-outline">Ver Demo</a>
-                            <a href="#" class="btn btn-outline">Código</a>
+                            <a href="#" class="btn btn-outline" data-gallery="onepiece" data-gallery-title="OnePiece API - Capturas" data-images="https://raw.githubusercontent.com/JavierManzano-30/2DAW/main/Despliegue/visualStudio22-OnePiece/imagenes/inicio.png|https://raw.githubusercontent.com/JavierManzano-30/2DAW/main/Despliegue/visualStudio22-OnePiece/imagenes/personajes.png|https://raw.githubusercontent.com/JavierManzano-30/2DAW/main/Despliegue/visualStudio22-OnePiece/imagenes/tripulacione.png|https://raw.githubusercontent.com/JavierManzano-30/2DAW/main/Despliegue/visualStudio22-OnePiece/imagenes/buscar.png">Ver Demo</a>
+                            <a href="https://github.com/JavierManzano-30/2DAW/tree/main/Despliegue/visualStudio22-OnePiece/OnePieceApi/OnePieceApi" target="_blank" class="btn btn-outline">Código</a>
                         </div>
                     </div>
                 </div>
@@ -335,6 +333,15 @@
         </div>
     </section>
     </main>
+
+    <div class="gallery-modal" id="gallery-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="gallery-backdrop" data-gallery-close></div>
+        <div class="gallery-panel" role="document">
+            <button class="gallery-close" type="button" aria-label="Cerrar galeria" data-gallery-close>&times;</button>
+            <h3 class="gallery-title" id="gallery-title">Demo</h3>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
