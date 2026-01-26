@@ -821,36 +821,26 @@ section:not(:first-of-type)::after {
   text-align: center;
 }
 
-.skill-item {
-  margin-bottom: var(--space-md);
+.skill-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
 }
 
-.skill-item:last-child {
-  margin-bottom: 0;
+.skill-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(77, 163, 255, 0.35);
+  background: rgba(77, 163, 255, 0.12);
+  box-shadow: 0 6px 16px rgba(10, 20, 40, 0.25);
 }
 
 .skill-item span {
-  display: block;
   font-weight: 500;
   color: var(--text-primary);
-  margin-bottom: var(--space-xs);
   font-size: var(--font-size-body);
-}
-
-.skill-bar {
-  height: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: var(--border-radius-small);
-  overflow: hidden;
-  position: relative;
-}
-
-.skill-progress {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
-  border-radius: var(--border-radius-small);
-  transition: width var(--transition-slow) var(--easing);
-  width: 0;
 }
 
 /* ========================================
