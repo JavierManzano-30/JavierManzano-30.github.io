@@ -16,6 +16,7 @@
   --nav-border: rgba(255, 255, 255, 0.18);
   --nav-border-scrolled: rgba(77, 163, 255, 0.2);
   --footer-bg: rgba(14, 15, 18, 0.8);
+  --footer-text: #9aa4b2;
   
   /* Glass Effect */
   --glass-bg: rgba(255, 255, 255, 0.08);
@@ -105,7 +106,8 @@ body[data-theme="light"] {
   --nav-bg-scrolled: rgba(244, 246, 251, 0.98);
   --nav-border: rgba(15, 23, 42, 0.12);
   --nav-border-scrolled: rgba(37, 99, 235, 0.25);
-  --footer-bg: rgba(244, 246, 251, 0.95);
+  --footer-bg: rgba(223, 228, 238, 0.9);
+  --footer-text: #2d3748;
 }
 
 /* Images - Sharp & Optimized */
@@ -1337,7 +1339,7 @@ body.no-scroll {
 }
 
 .footer p {
-  color: var(--text-secondary);
+  color: var(--footer-text);
   font-size: var(--font-size-body);
 }
 
