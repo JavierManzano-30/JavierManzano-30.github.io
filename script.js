@@ -102,7 +102,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
     // Add animation classes to elements for scroll reveal
-    const animateElements = document.querySelectorAll('.skill-category, .project-card, .stat, .about-content, .video-card, .subscribe-box, .contact-content, .youtube-hero');
+    const animateElements = document.querySelectorAll('.skill-category, .skills-grid, .project-card, .stat, .about-content, .about-stats, .video-card, .subscribe-box, .contact-content, .youtube-hero');
     animateElements.forEach(el => {
         el.classList.add('slide-up');
         observer.observe(el);
