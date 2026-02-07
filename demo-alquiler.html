@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo | Alquiler Coches</title>
+  <style>
+    :root {
+      --bg: #0c1022;
+      --bg2: #111834;
+      --text: #eaf2ff;
+      --muted: #9eb1d5;
+      --line: rgba(95,170,255,.35);
+      --card: rgba(19,30,58,.8);
+      --ok: #52f1c7;
+      --warn: #ffb457;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Space Grotesk", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(82,241,199,.15), transparent 35%),
+        radial-gradient(circle at 80% 80%, rgba(95,170,255,.18), transparent 42%),
+        linear-gradient(150deg, var(--bg), var(--bg2));
+      padding: 24px;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    .top { display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; align-items:center; margin-bottom:16px; }
+    h1 { font-size: clamp(24px, 4vw, 38px); }
+    .back { text-decoration:none; color:var(--text); border:1px solid var(--line); border-radius:10px; padding:10px 14px; }
+
+    .layout { display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .panel h2 { margin-bottom: 10px; font-size: 20px; }
+
+    .cars { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:10px; }
+    .car {
+      border:1px solid rgba(95,170,255,.3); border-radius:12px; padding:12px;
+      background: rgba(11,20,42,.65);
+    }
+    .car h3 { font-size: 18px; margin-bottom: 6px; color: var(--ok); }
+    .meta { color: var(--muted); font-size: 14px; line-height: 1.45; }
+
+    form { display:grid; gap:10px; }
+    label { font-size: 14px; color: var(--muted); display:grid; gap:6px; }
+    input, select {
+      width:100%; border:1px solid var(--line); border-radius:10px;
+      background: rgba(11,20,42,.8); color: var(--text); padding:10px 12px;
+      font: inherit;
+    }
+    button {
+      border:1px solid rgba(82,241,199,.6); border-radius:10px;
+      padding:10px 14px; font:inherit; font-weight:700; cursor:pointer;
+      color:#06201a; background: linear-gradient(135deg, var(--ok), #baffef);
+    }
+    .msg { margin-top:10px; min-height:20px; font-size:14px; }
+    .msg.ok { color: var(--ok); }
+    .msg.warn { color: var(--warn); }
+
+    .reservas { display:grid; gap:8px; margin-top: 10px; }
+    .reserva {
+      border:1px solid rgba(95,170,255,.3); border-radius:10px; padding:10px;
+      background: rgba(11,20,42,.6);
+      display:flex; justify-content:space-between; gap:10px; align-items:flex-start;
+    }
+    .reserva p { color: var(--muted); font-size: 14px; }
+    .reserva strong { color: var(--text); }
+    .reserva button {
+      background: rgba(95,170,255,.18);
+      color: var(--text);
+      border-color: rgba(95,170,255,.5);
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 960px){ .layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>Demo Realista: Alquiler de Coches</h1>
+      <a class="back" href="index.html#projects">Volver a proyectos</a>
+    </div>
+
+    <div class="layout">
+      <section class="panel">
+        <h2>Coches disponibles</h2>
+        <div class="cars" id="cars"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Nueva reserva</h2>
+        <form id="form">
+          <label>Cliente
+            <input type="text" name="cliente" required placeholder="Tu nombre" />
+          </label>
+          <label>Coche
+            <select name="coche" id="coche"></select>
+          </label>
+          <label>Inicio
+            <input type="date" name="inicio" required />
+          </label>
+          <label>Fin
+            <input type="date" name="fin" required />
+          </label>
+          <button type="submit">Reservar</button>
+        </form>
+        <p class="msg" id="msg"></p>
+
+        <h2 style="margin-top:14px;">Reservas activas</h2>
+        <div class="reservas" id="reservas"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const cars = [
+      { id: "toyota86", modelo: "Toyota GT86", precioDia: 65, combustible: "Gasolina" },
+      { id: "nissan370", modelo: "Nissan 370Z", precioDia: 85, combustible: "Gasolina" },
+      { id: "mazdaMx5", modelo: "Mazda MX-5", precioDia: 72, combustible: "Gasolina" },
+      { id: "hondaCivic", modelo: "Honda Civic Type R", precioDia: 95, combustible: "Gasolina" }
+    ];
+
+    const carBox = document.getElementById("cars");
+    const form = document.getElementById("form");
+    const cocheSelect = document.getElementById("coche");
+    const reservasBox = document.getElementById("reservas");
+    const msg = document.getElementById("msg");
+
+    let reservas = [];
+
+    function daysBetween(start, end){
+      const dayMs = 24 * 60 * 60 * 1000;
+      return Math.floor((end - start) / dayMs) + 1;
+    }
+
+    function overlaps(aStart, aEnd, bStart, bEnd){
+      return aStart <= bEnd && bStart <= aEnd;
+    }
+
+    function showMsg(text, type){
+      msg.textContent = text;
+      msg.className = `msg ${type}`;
+    }
+
+    function renderCars(){
+      carBox.innerHTML = "";
+      cars.forEach((car) => {
+        const div = document.createElement("article");
+        div.className = "car";
+        div.innerHTML = `
+          <h3>${car.modelo}</h3>
+          <p class="meta">Precio/día: <strong>${car.precioDia}€</strong></p>
+          <p class="meta">Combustible: ${car.combustible}</p>
+        `;
+        carBox.appendChild(div);
+      });
+    }
+
+    function renderSelect(){
+      cocheSelect.innerHTML = cars.map((car) => `<option value="${car.id}">${car.modelo}</option>`).join("");
+    }
+
+    function renderReservas(){
+      reservasBox.innerHTML = "";
+      if (!reservas.length){
+        reservasBox.innerHTML = '<p class="meta">No hay reservas todavía.</p>';
+        return;
+      }
+      reservas.forEach((r) => {
+        const div = document.createElement("article");
+        div.className = "reserva";
+        div.innerHTML = `
+          <div>
+            <p><strong>${r.cliente}</strong> - ${r.modelo}</p>
+            <p>${r.inicio} -> ${r.fin} (${r.dias} día(s))</p>
+            <p>Total: <strong>${r.total}€</strong></p>
+          </div>
+          <button type="button" data-id="${r.id}">Cancelar</button>
+        `;
+        reservasBox.appendChild(div);
+      });
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const cliente = String(fd.get("cliente") || "").trim();
+      const coche = String(fd.get("coche") || "");
+      const inicioText = String(fd.get("inicio") || "");
+      const finText = String(fd.get("fin") || "");
+
+      if (!cliente || !inicioText || !finText){
+        showMsg("Completa todos los campos.", "warn");
+        return;
+      }
+
+      const inicio = new Date(`${inicioText}T00:00:00`);
+      const fin = new Date(`${finText}T00:00:00`);
+      const hoy = new Date();
+      hoy.setHours(0,0,0,0);
+
+      if (inicio < hoy || fin < hoy){
+        showMsg("No se permiten reservas en el pasado.", "warn");
+        return;
+      }
+      if (fin < inicio){
+        showMsg("La fecha fin no puede ser anterior al inicio.", "warn");
+        return;
+      }
+
+      const car = cars.find((c) => c.id === coche);
+      const occupied = reservas.some((r) =>
+        r.coche === coche && overlaps(inicio, fin, new Date(`${r.inicio}T00:00:00`), new Date(`${r.fin}T00:00:00`))
+      );
+
+      if (occupied){
+        showMsg("Ese coche ya está reservado en ese rango de fechas.", "warn");
+        return;
+      }
+
+      const dias = daysBetween(inicio, fin);
+      const total = dias * car.precioDia;
+      reservas.unshift({
+        id: crypto.randomUUID(),
+        cliente,
+        coche,
+        modelo: car.modelo,
+        inicio: inicioText,
+        fin: finText,
+        dias,
+        total
+      });
+
+      renderReservas();
+      form.reset();
+      renderSelect();
+      showMsg(`Reserva creada: ${car.modelo} por ${dias} día(s), total ${total}€`, "ok");
+    });
+
+    reservasBox.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-id]");
+      if (!btn) return;
+      const id = btn.getAttribute("data-id");
+      reservas = reservas.filter((r) => r.id !== id);
+      renderReservas();
+      showMsg("Reserva cancelada.", "ok");
+    });
+
+    renderCars();
+    renderSelect();
+    renderReservas();
+  </script>
+</body>
+</html>

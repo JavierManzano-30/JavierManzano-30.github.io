@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JManzanoO - Portfolio</title>
-    <link rel="stylesheet" href="styles.css?v=2.3">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=2.4">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <a href="mascosas.html" class="skip-link">Saltar al contenido principal</a>
+    <a href="minijuego.html" class="skip-link">Saltar al contenido principal</a>
     
     <!-- Navigation -->
     <header role="banner">
@@ -21,8 +21,9 @@
             <div class="nav-actions">
             <div class="nav-menu" id="nav-menu">
                 <a href="#home" class="nav-link">Inicio</a>
-            <a href="#about" class="nav-link">Sobre Mí</a>
+                <a href="#about" class="nav-link">Sobre Mí</a>
                 <a href="#skills" class="nav-link">Habilidades</a>
+                <a href="#journey" class="nav-link">Ruta</a>
                 <a href="#projects" class="nav-link">Proyectos</a>
                 <a href="#youtube" class="nav-link">Parkour</a>
                 <a href="#contact" class="nav-link">Contacto</a>
@@ -40,6 +41,37 @@
     </nav>
     </header>
 
+    <aside class="section-map" id="section-map" aria-label="Mapa de secciones">
+        <a href="#home" class="map-item" data-map-link="home">
+            <span class="map-dot" aria-hidden="true"></span>
+            <span class="map-label">Inicio</span>
+        </a>
+        <a href="#about" class="map-item" data-map-link="about">
+            <span class="map-dot" aria-hidden="true"></span>
+            <span class="map-label">Sobre mí</span>
+        </a>
+        <a href="#skills" class="map-item" data-map-link="skills">
+            <span class="map-dot" aria-hidden="true"></span>
+            <span class="map-label">Habilidades</span>
+        </a>
+        <a href="#journey" class="map-item" data-map-link="journey">
+            <span class="map-dot" aria-hidden="true"></span>
+            <span class="map-label">Ruta</span>
+        </a>
+        <a href="#projects" class="map-item" data-map-link="projects">
+            <span class="map-dot" aria-hidden="true"></span>
+            <span class="map-label">Proyectos</span>
+        </a>
+        <a href="#youtube" class="map-item" data-map-link="youtube">
+            <span class="map-dot" aria-hidden="true"></span>
+            <span class="map-label">Parkour</span>
+        </a>
+        <a href="#contact" class="map-item" data-map-link="contact">
+            <span class="map-dot" aria-hidden="true"></span>
+            <span class="map-label">Contacto</span>
+        </a>
+    </aside>
+
     <main id="main-content">
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -52,6 +84,11 @@
                 </p>
                 <p class="hero-description">Especializado en crear experiencias digitales únicas y soluciones innovadoras
                 </p>
+                <div class="hero-pills">
+                    <span class="hero-pill"><i class="fas fa-code"></i> Full Stack Junior</span>
+                    <span class="hero-pill"><i class="fas fa-bolt"></i> Aprendizaje rápido</span>
+                    <span class="hero-pill"><i class="fas fa-people-group"></i> Trabajo en equipo</span>
+                </div>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn btn-primary">Ver Proyectos</a>
                     <a href="#contact" class="btn btn-secondary">Contactar</a>
@@ -60,6 +97,9 @@
             <div class="hero-image">
                 <div class="profile-image-container">
                     <img src="img/yo.png" alt="JManzanoO - Foto de perfil" class="profile-image">
+                    <div class="profile-badge">
+                        <i class="fas fa-location-dot"></i> Sevilla
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,19 +120,18 @@
                     <p>
                         Fuera del código, me encanta escuchar música (rap, rock y española), ver anime y jugar videojuegos. También juego al pádel y hago parkour.
                     </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>Ahora</h3>
-                            <p>2º de DAW, aprendiendo y practicando cada semana</p>
-                        </div>
-                        <div class="stat">
-                            <h3>Objetivo</h3>
-                            <p>Entender el mundo del desarrollo desde dentro</p>
-                        </div>
-                        <div class="stat">
-                            <h3>Fuera del código</h3>
-                            <p>Música, anime, videojuegos, pádel y parkour</p>
-                        </div>
+                    <div class="about-panel">
+                        <h3>Perfil rápido</h3>
+                        <ul class="about-points">
+                            <li><i class="fas fa-user-graduate"></i> 2º de DAW, mejorando cada semana con práctica constante.</li>
+                            <li><i class="fas fa-sitemap"></i> Me gusta entender arquitectura, lógica y cómo escalan los proyectos.</li>
+                            <li><i class="fas fa-users"></i> Buen encaje en equipo, comunicación directa y ganas de aportar.</li>
+                        </ul>
+                    </div>
+                    <div class="about-focus">
+                        <span><i class="fas fa-crosshairs"></i> Objetivo: primer rol como dev junior</span>
+                        <span><i class="fas fa-gamepad"></i> Intereses: anime, gaming y música</span>
+                        <span><i class="fas fa-person-running"></i> Extra: parkour y pádel</span>
                     </div>
                 </div>
             </div>
@@ -105,61 +144,86 @@
             <h2 class="section-title">Habilidades</h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3>Lenguajes Web</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>HTML</span>
-                        </div>
-                        <div class="skill-item">
-                            <span>CSS</span>
-                        </div>
-                        <div class="skill-item">
-                            <span>JavaScript</span>
-                        </div>
-                        <div class="skill-item">
-                            <span>TypeScript</span>
-                        </div>
-                    </div>
+                    <h3><i class="fas fa-code"></i> Frontend</h3>
+                    <ul class="skills-info-list">
+                        <li class="skill-info-item"><i class="fab fa-html5"></i><span>HTML semántico y CSS responsive para interfaces web.</span></li>
+                        <li class="skill-info-item"><i class="fab fa-js"></i><span>JavaScript para interacción de UI y consumo de APIs.</span></li>
+                        <li class="skill-info-item"><i class="fab fa-react"></i><span>React con React Router en proyectos de frontend.</span></li>
+                        <li class="skill-info-item"><i class="fas fa-bolt"></i><span>Vite como entorno de desarrollo y build en React.</span></li>
+                        <li class="skill-info-item"><i class="fas fa-file-code"></i><span>TypeScript y Next.js en prácticas recientes.</span></li>
+                    </ul>
                 </div>
                 <div class="skill-category">
-                    <h3>Lenguajes</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>Java</span>
-                        </div>
-                        <div class="skill-item">
-                            <span>C#</span>
-                        </div>
-                        <div class="skill-item">
-                            <span>Python</span>
-                        </div>
-                        <div class="skill-item">
-                            <span>LLVM</span>
-                        </div>
-                    </div>
+                    <h3><i class="fas fa-server"></i> Backend y lógica</h3>
+                    <ul class="skills-info-list">
+                        <li class="skill-info-item"><i class="fab fa-node-js"></i><span>Node.js y Express en APIs REST y middleware.</span></li>
+                        <li class="skill-info-item"><i class="fas fa-database"></i><span>MongoDB con Mongoose (modelado y consultas).</span></li>
+                        <li class="skill-info-item"><i class="fas fa-user-shield"></i><span>Autenticación por token y control de roles (JWT).</span></li>
+                        <li class="skill-info-item"><i class="fas fa-book-open"></i><span>Documentación de APIs con OpenAPI y Swagger UI.</span></li>
+                        <li class="skill-info-item"><i class="fas fa-envelope-open-text"></i><span>Servicios SMTP con Nodemailer y Mailhog.</span></li>
+                    </ul>
                 </div>
                 <div class="skill-category">
-                    <h3>Herramientas y Otros</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>Dockerfile</span>
+                    <h3><i class="fas fa-screwdriver-wrench"></i> Herramientas</h3>
+                    <ul class="skills-info-list">
+                        <li class="skill-info-item"><i class="fab fa-git-alt"></i><span>Git y GitHub para versionado y trabajo en equipo.</span></li>
+                        <li class="skill-info-item"><i class="fab fa-docker"></i><span>Docker y Docker Compose (Node, Nginx, Mongo).</span></li>
+                        <li class="skill-info-item"><i class="fas fa-vial"></i><span>Testing con Jest y Vitest en ejercicios y APIs.</span></li>
+                        <li class="skill-info-item"><i class="fas fa-terminal"></i><span>NPM, Bash y PowerShell para flujo diario de desarrollo.</span></li>
+                        <li class="skill-info-item"><i class="fab fa-php"></i><span>Bases de PHP/Drupal en entorno Docker de prácticas.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section id="journey" class="journey">
+        <div class="container">
+            <h2 class="section-title">Mi Ruta</h2>
+            <div class="journey-layout">
+                <div class="timeline">
+                    <article class="timeline-item">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <div class="timeline-card">
+                            <p class="timeline-date">2024 - 2026</p>
+                            <h3>2º DAW y proyectos reales</h3>
+                            <p>Construyendo una base sólida en desarrollo web con práctica continua en frontend, backend y despliegue.</p>
                         </div>
-                        <div class="skill-item">
-                            <span>PowerShell</span>
+                    </article>
+                    <article class="timeline-item">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <div class="timeline-card">
+                            <p class="timeline-date">Actualmente</p>
+                            <h3>API y arquitectura por capas</h3>
+                            <p>Mejorando en diseño de APIs REST, validaciones y organización de proyectos más mantenibles.</p>
                         </div>
-                        <div class="skill-item">
-                            <span>Batchfile</span>
+                    </article>
+                    <article class="timeline-item">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <div class="timeline-card">
+                            <p class="timeline-date">Siguiente paso</p>
+                            <h3>Primer rol profesional</h3>
+                            <p>Objetivo: entrar en un equipo donde aportar desde el día uno y seguir creciendo técnicamente.</p>
                         </div>
-                        <div class="skill-item">
-                            <span>AIDL</span>
-                        </div>
-                        <div class="skill-item">
-                            <span>Papyrus</span>
-                        </div>
-                        <div class="skill-item">
-                            <span>Roff</span>
-                        </div>
-                    </div>
+                    </article>
+                </div>
+                <div class="milestones">
+                    <article class="milestone-card">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Frontend limpio</h3>
+                        <p>Interfaces responsivas con HTML, CSS y JavaScript moderno.</p>
+                    </article>
+                    <article class="milestone-card">
+                        <i class="fas fa-server"></i>
+                        <h3>Backend práctico</h3>
+                        <p>Experiencia montando servicios y endpoints para proyectos académicos.</p>
+                    </article>
+                    <article class="milestone-card">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Enfoque en mejora</h3>
+                        <p>Itero rápido, mido resultados y aplico feedback en cada entrega.</p>
+                    </article>
                 </div>
             </div>
         </div>
@@ -172,6 +236,7 @@
             <div class="projects-grid">
                 <div class="project-card">
                     <figure class="project-image">
+                        <span class="project-badge">Web App</span>
                         <div class="project-placeholder" aria-hidden="true">
                             <i class="fas fa-laptop-code"></i>
                         </div>
@@ -190,6 +255,7 @@
                 </div>
                 <div class="project-card">
                     <figure class="project-image">
+                        <span class="project-badge">API</span>
                         <div class="project-placeholder" aria-hidden="true">
                             <i class="fas fa-skull-crossbones"></i>
                         </div>
@@ -209,6 +275,7 @@
                 </div>
                 <div class="project-card">
                     <figure class="project-image">
+                        <span class="project-badge">Diseño Web</span>
                         <div class="project-placeholder" aria-hidden="true">
                             <i class="fas fa-code"></i>
                         </div>
@@ -248,7 +315,7 @@
                         </a>
                     </div>
                     <figure class="youtube-placeholder">
-                        <img src="Youtube.png" alt="Mi Canal de Parkour" loading="lazy">
+                        <img src="img/Youtube.png" alt="Mi Canal de Parkour" loading="lazy">
                     </figure>
                 </div>
                 
@@ -308,7 +375,7 @@
                     <div class="social-links">
                         <a href="https://github.com/JManzanoO" class="social-link"><i class="fab fa-github"></i></a>
                         <a href="https://www.linkedin.com/in/javier-manzano-410564172/" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://x.com/JManzanoO30" class="social-link"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.instagram.com/manzano.jiseidento/" class="social-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
@@ -332,32 +399,13 @@
     </section>
     </main>
 
-    <div class="gallery-modal" id="gallery-modal" aria-hidden="true" role="dialog" aria-modal="true">
-        <div class="gallery-backdrop" data-gallery-close></div>
-        <div class="gallery-panel" role="document">
-            <button class="gallery-close" type="button" aria-label="Cerrar galeria" data-gallery-close>&times;</button>
-            <h3 class="gallery-title" id="gallery-title">Demo</h3>
-            <div class="gallery-grid" id="gallery-grid"></div>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer class="footer" role="contentinfo">
         <div class="container">
-            <p>&copy; 2025 JManzanoO. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Javier Manzano Oliveros. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

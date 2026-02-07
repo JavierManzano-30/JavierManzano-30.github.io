@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo | OnePiece API</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg2: #121b34;
+      --card: #1a2444;
+      --text: #e8f0ff;
+      --muted: #9db4d8;
+      --line: rgba(99, 178, 255, 0.35);
+      --accent: #58f0d3;
+      --accent2: #5ba3ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: "Space Grotesk", "Segoe UI", sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at 15% 15%, rgba(88,240,211,.15), transparent 35%),
+                  radial-gradient(circle at 80% 85%, rgba(91,163,255,.16), transparent 40%),
+                  linear-gradient(150deg, var(--bg), var(--bg2));
+      padding: 24px;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    .top {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    h1 { font-size: clamp(24px, 4vw, 38px); }
+    .back {
+      text-decoration: none; color: var(--text); border: 1px solid var(--line); border-radius: 10px;
+      padding: 10px 14px; background: rgba(9,16,32,.6);
+    }
+    .panel {
+      border: 1px solid var(--line); border-radius: 14px; background: rgba(13,23,46,.78);
+      padding: 14px; margin-bottom: 14px;
+    }
+    .controls { display: grid; grid-template-columns: 1.2fr .8fr auto; gap: 10px; }
+    input, select {
+      width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+      color: var(--text); background: rgba(26,36,68,.7);
+    }
+    button {
+      border: 1px solid rgba(88,240,211,.5); border-radius: 10px; padding: 10px 16px;
+      color: #081a2f; background: linear-gradient(135deg, var(--accent), #b8fff1); font-weight: 700; cursor: pointer;
+    }
+    .hint { color: var(--muted); margin-top: 10px; font-size: 14px; }
+    .status { margin: 8px 0 2px; color: var(--muted); min-height: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+    .card {
+      border: 1px solid rgba(91,163,255,.35); border-radius: 12px; padding: 12px;
+      background: rgba(26,36,68,.7); min-height: 120px;
+    }
+    .card h3 { font-size: 18px; margin-bottom: 8px; color: var(--accent); }
+    .meta { color: var(--muted); font-size: 14px; line-height: 1.45; }
+    @media (max-width: 820px){ .controls { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>Demo Real: OnePiece API</h1>
+      <a class="back" href="index.html#projects">Volver a proyectos</a>
+    </div>
+
+    <section class="panel">
+      <div class="controls">
+        <input id="endpoint" type="text" value="characters" placeholder="Endpoint (characters, crews, search?name=luffy...)" />
+        <select id="limit">
+          <option value="8">8 resultados</option>
+          <option value="12" selected>12 resultados</option>
+          <option value="20">20 resultados</option>
+        </select>
+        <button id="load">Cargar</button>
+      </div>
+      <p class="hint">Base URL: <code>https://api2-onepiece2-bne8abdbcgbqfugj.spaincentral-01.azurewebsites.net/api/</code></p>
+      <p class="status" id="status"></p>
+    </section>
+
+    <section class="grid" id="results"></section>
+  </div>
+
+  <script>
+    const baseUrl = "https://api2-onepiece2-bne8abdbcgbqfugj.spaincentral-01.azurewebsites.net/api/";
+    const loadBtn = document.getElementById("load");
+    const endpointEl = document.getElementById("endpoint");
+    const limitEl = document.getElementById("limit");
+    const resultsEl = document.getElementById("results");
+    const statusEl = document.getElementById("status");
+
+    const fallback = [
+      { name: "Monkey D. Luffy", role: "Capitán", origin: "East Blue", bounty: "3,000,000,000" },
+      { name: "Roronoa Zoro", role: "Espadachín", origin: "East Blue", bounty: "1,111,000,000" },
+      { name: "Nami", role: "Navegante", origin: "East Blue", bounty: "366,000,000" },
+      { name: "Sanji", role: "Cocinero", origin: "North Blue", bounty: "1,032,000,000" }
+    ];
+
+    function pick(item, keys){
+      for (const key of keys){
+        if (item && item[key] !== undefined && item[key] !== null && item[key] !== "") return item[key];
+      }
+      return "-";
+    }
+
+    function render(items, source){
+      const max = Number(limitEl.value);
+      const slice = items.slice(0, max);
+      resultsEl.innerHTML = "";
+
+      if (!slice.length){
+        resultsEl.innerHTML = '<article class="card"><h3>Sin datos</h3><p class="meta">No se encontraron resultados para ese endpoint.</p></article>';
+        return;
+      }
+
+      slice.forEach((item) => {
+        const title = pick(item, ["name", "nombre", "title", "id"]);
+        const sub1 = pick(item, ["role", "puesto", "occupation", "crew", "faction", "status"]);
+        const sub2 = pick(item, ["origin", "from", "race", "type", "age"]);
+        const sub3 = pick(item, ["bounty", "recompensa", "power", "description"]);
+
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `
+          <h3>${String(title)}</h3>
+          <p class="meta"><strong>Dato 1:</strong> ${String(sub1)}</p>
+          <p class="meta"><strong>Dato 2:</strong> ${String(sub2)}</p>
+          <p class="meta"><strong>Dato 3:</strong> ${String(sub3)}</p>
+        `;
+        resultsEl.appendChild(card);
+      });
+
+      statusEl.textContent = `Fuente: ${source}. Mostrando ${slice.length} resultado(s).`;
+    }
+
+    async function loadData(){
+      const endpoint = endpointEl.value.trim().replace(/^\/+/, "") || "characters";
+      const url = baseUrl + endpoint;
+      statusEl.textContent = "Cargando...";
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const list = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : [data]);
+        render(list, "API real");
+      } catch (error) {
+        render(fallback, "Fallback local (la API no respondió o bloqueó CORS)");
+      }
+    }
+
+    loadBtn.addEventListener("click", loadData);
+    endpointEl.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") loadData();
+    });
+
+    loadData();
+  </script>
+</body>
+</html>
