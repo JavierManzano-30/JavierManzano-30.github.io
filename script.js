@@ -109,30 +109,21 @@ document.querySelectorAll('.nav-link').forEach(link => {
 });
 
 // Navbar state on scroll
-let lastScrollY = window.scrollY;
 const updateNavbarState = () => {
     const navbar = document.querySelector('.navbar');
     if (!navbar) {
         return;
     }
     const currentScrollY = window.scrollY;
-    const isMenuOpen = navMenu && navMenu.classList.contains('active');
 
     navbar.classList.toggle('is-scrolled', currentScrollY > 50);
-
-    if (!isMenuOpen && currentScrollY > 120 && currentScrollY > lastScrollY) {
-        navbar.classList.add('is-hidden');
-    } else {
-        navbar.classList.remove('is-hidden');
-    }
+    navbar.classList.toggle('is-hidden', currentScrollY > 0);
 
     if (sectionMap) {
         sectionMap.classList.toggle('is-visible', currentScrollY > 180);
     }
 
     setActiveSection(getCurrentSectionId());
-
-    lastScrollY = currentScrollY;
 };
 
 window.addEventListener('scroll', updateNavbarState);
