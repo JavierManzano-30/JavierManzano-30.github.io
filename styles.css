@@ -441,6 +441,30 @@ button {
   font-size: 16px;
 }
 
+.lang-toggle {
+  min-width: 44px;
+  height: 40px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  transition: transform var(--transition-base), color var(--transition-base), border-color var(--transition-base), background var(--transition-base);
+}
+
+.lang-toggle:hover,
+.lang-toggle:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--accent-blue);
+  color: var(--accent-cyan);
+}
+
 /* ========================================
    SECTION MAP (LEFT RAIL)
    ======================================== */
@@ -629,6 +653,46 @@ button {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.hero-title .highlight-animated {
+  display: inline-flex;
+  gap: 0.01em;
+  margin-left: 0.12em;
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: var(--accent-cyan);
+  filter: drop-shadow(0 0 14px rgba(112, 255, 225, 0.18));
+}
+
+.hero-title .highlight-char {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  transform: translateY(16px) scale(0.9);
+  filter: blur(2px);
+  animation: hero-highlight-in 620ms var(--easing) forwards;
+}
+
+@keyframes hero-highlight-in {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.9);
+    filter: blur(2px);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.04);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
 
 .hero-subtitle {
