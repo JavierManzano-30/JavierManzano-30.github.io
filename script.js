@@ -17,9 +17,13 @@ const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 const themeToggle = document.getElementById('theme-toggle');
 const langToggle = document.getElementById('lang-toggle');
+const mapThemeToggle = document.getElementById('map-theme-toggle');
+const mapLangToggle = document.getElementById('map-lang-toggle');
 const sectionMap = document.getElementById('section-map');
 const mapLinks = document.querySelectorAll('[data-map-link]');
 const pageSections = document.querySelectorAll('main section[id]');
+const themeToggles = [themeToggle, mapThemeToggle].filter(Boolean);
+const langToggles = [langToggle, mapLangToggle].filter(Boolean);
 let currentLanguage = 'es';
 let heroTypingTimer = null;
 let heroTypingRun = 0;
@@ -32,18 +36,18 @@ const i18n = {
             home: 'Inicio',
             about: 'Sobre Mí',
             skills: 'Habilidades',
-            journey: 'Ruta',
+            studies: 'Estudios',
+            work: 'Trabajo',
             projects: 'Proyectos',
-            youtube: 'Parkour',
             contact: 'Contacto'
         },
         map: {
             home: 'Inicio',
             about: 'Sobre mí',
             skills: 'Habilidades',
-            journey: 'Ruta',
+            studies: 'Estudios',
+            work: 'Trabajo',
             projects: 'Proyectos',
-            youtube: 'Parkour',
             contact: 'Contacto'
         },
         heroPrefix: 'Hola, soy ',
@@ -52,7 +56,7 @@ const i18n = {
         heroDescription: 'Especializado en crear experiencias digitales únicas y soluciones innovadoras',
         heroPills: ['Full Stack Junior', 'Aprendizaje rápido', 'Trabajo en equipo'],
         heroButtons: ['Ver Proyectos', 'Contactar'],
-        sectionTitles: ['Sobre Mí', 'Habilidades', 'Mi Ruta', 'Proyectos Destacados', 'Mi Canal de Parkour', 'Contacto'],
+        sectionTitles: ['Sobre Mí', 'Habilidades', 'Estudios', 'Trabajo', 'Proyectos Destacados', 'Contacto'],
         profileLocation: 'Sevilla',
         about: {
             paragraphs: [
@@ -64,6 +68,15 @@ const i18n = {
                 '2º de DAW, mejorando cada semana con práctica constante.',
                 'Me gusta entender arquitectura, lógica y cómo escalan los proyectos.',
                 'Buen encaje en equipo, comunicación directa y ganas de aportar.'
+            ],
+            socialTitle: 'Social Skills',
+            socialItems: [
+                'Trabajo en equipo',
+                'Resolución de problemas',
+                'Responsabilidad en el equipo',
+                'Buenas habilidades de comunicación',
+                'Organización y puntualidad',
+                'Liderazgo'
             ],
             focus: [
                 'Objetivo: primer rol como dev junior',
@@ -91,19 +104,38 @@ const i18n = {
                 'Bases de PHP/Drupal en entorno Docker de prácticas.'
             ]
         },
-        journey: {
-            dates: ['2024 - 2026', 'Actualmente', 'Siguiente paso'],
-            titles: ['2º DAW y proyectos reales', 'API y arquitectura por capas', 'Primer rol profesional'],
-            descriptions: [
-                'Construyendo una base sólida en desarrollo web con práctica continua en frontend, backend y despliegue.',
-                'Mejorando en diseño de APIs REST, validaciones y organización de proyectos más mantenibles.',
-                'Objetivo: entrar en un equipo donde aportar desde el día uno y seguir creciendo técnicamente.'
+        studies: {
+            titles: [
+                'Grado Medio TECO',
+                'Grado Superior Enseñanza y Animación',
+                'Grado Superior ADAITS Desarrollo de Aplicaciones Web',
+                'Idiomas'
             ],
-            milestoneTitles: ['Frontend limpio', 'Backend práctico', 'Enfoque en mejora'],
-            milestoneDescriptions: [
-                'Interfaces responsivas con HTML, CSS y JavaScript moderno.',
-                'Experiencia montando servicios y endpoints para proyectos académicos.',
-                'Itero rápido, mido resultados y aplico feedback en cada entrega.'
+            descriptions: [
+                '2017-09 - 2019-06 · CESUR, Sevilla.',
+                '2019-09 - 2021-06 · CESUR, Sevilla.',
+                '2024 - 2026 · ADAITS.',
+                'Español nativo, Inglés B2.'
+            ]
+        },
+        work: {
+            dates: [
+                '2023-02 - 2023-05 / 2018-09 - 2019-05',
+                '2020-08 - 2023-01',
+                '2023-04 - 2024-09',
+                '2021-11 - Actualidad'
+            ],
+            titles: [
+                'Monitor de tiempo libre - BOSQUE SUSPENDIDO, Sevilla',
+                'Monitor de tiempo libre - Universo Parkour, Sevilla',
+                'Carretillero - RHENUS LOGISTICS (EUROFIRMS), Sevilla',
+                'Camarero - Asador Montequinto, Sevilla'
+            ],
+            descriptions: [
+                'Montura y recogida de material de trabajo, supervisión durante las actividades, apoyo y orientación a participantes y planificación de contingencias.',
+                'Orientación y apoyo en etapa deportiva, planificación de actividades, alimentación y retroalimentación, supervisión de emergencias, adaptación a nuevas situaciones y participación en proyectos de gran escala.',
+                'Control de maquinaria, carga y descarga de camiones y uso de pistola de picking.',
+                'Colocación y recogida de mesas, servicio de menús para 15-30 personas, bebidas y comidas en mesa, apoyo de limpieza en cocina y preparación de menús.'
             ]
         },
         projects: {
@@ -115,22 +147,6 @@ const i18n = {
                 'Proyecto final de Lenguaje de Marcas con foco en HTML y CSS, maquetación limpia y estructura semántica.'
             ],
             codeButton: 'Código'
-        },
-        youtube: {
-            heroTitle: 'Explorando el Parkour con Manzano',
-            paragraphs: [
-                'Bienvenido a mi canal de YouTube donde comparto mi pasión por el parkour. En este espacio encontrarás videos sobre el parkour que hacemos en Sevilla y mi viaje en el mundo del movimiento libre.',
-                'Desde saltos básicos hasta movimientos avanzados, documentando mi progreso y compartiendo lo que aprendo en el camino.'
-            ],
-            visitChannel: 'Visitar Canal',
-            cardDescriptions: [
-                'Explora increíbles vídeos de parkour y movimiento urbano desde Galicia al mundo',
-                'Contenido inédito de parkour y movimiento libre en la ciudad',
-                'Mi grupo de parkour de Sevilla, España'
-            ],
-            subscribeTitle: 'Únete a la Comunidad!',
-            subscribeText: 'Suscríbete al canal para no perderte ningún video nuevo de parkour',
-            subscribeButton: 'Suscribirse'
         },
         contact: {
             heading: '¡Trabajemos juntos!',
@@ -165,18 +181,18 @@ const i18n = {
             home: 'Home',
             about: 'About',
             skills: 'Skills',
-            journey: 'Journey',
+            studies: 'Studies',
+            work: 'Work',
             projects: 'Projects',
-            youtube: 'Parkour',
             contact: 'Contact'
         },
         map: {
             home: 'Home',
             about: 'About',
             skills: 'Skills',
-            journey: 'Journey',
+            studies: 'Studies',
+            work: 'Work',
             projects: 'Projects',
-            youtube: 'Parkour',
             contact: 'Contact'
         },
         heroPrefix: 'Hi, I am ',
@@ -185,7 +201,7 @@ const i18n = {
         heroDescription: 'Focused on building unique digital experiences and innovative solutions',
         heroPills: ['Junior Full Stack', 'Fast learner', 'Team player'],
         heroButtons: ['View Projects', 'Contact'],
-        sectionTitles: ['About Me', 'Skills', 'My Journey', 'Featured Projects', 'My Parkour Channel', 'Contact'],
+        sectionTitles: ['About Me', 'Skills', 'Studies', 'Work', 'Featured Projects', 'Contact'],
         profileLocation: 'Seville',
         about: {
             paragraphs: [
@@ -197,6 +213,15 @@ const i18n = {
                 'Second year DAW student, improving every week with constant practice.',
                 'I like understanding architecture, logic and how projects scale.',
                 'Strong team fit, direct communication and willingness to contribute.'
+            ],
+            socialTitle: 'Social Skills',
+            socialItems: [
+                'Teamwork',
+                'Problem solving',
+                'Team responsibility',
+                'Strong communication skills',
+                'Organization and punctuality',
+                'Leadership'
             ],
             focus: [
                 'Goal: first junior developer role',
@@ -224,19 +249,38 @@ const i18n = {
                 'PHP/Drupal basics in Docker-based practice environments.'
             ]
         },
-        journey: {
-            dates: ['2024 - 2026', 'Currently', 'Next step'],
-            titles: ['Second year DAW and real projects', 'API and layered architecture', 'First professional role'],
-            descriptions: [
-                'Building a solid web development foundation with continuous practice in frontend, backend and deployment.',
-                'Improving REST API design, validations and maintainable project structure.',
-                'Goal: join a team where I can contribute from day one and keep growing technically.'
+        studies: {
+            titles: [
+                'Intermediate Vocational Degree TECO',
+                'Higher Vocational Degree Sports Teaching and Animation',
+                'Higher Vocational Degree ADAITS Web Application Development',
+                'Languages'
             ],
-            milestoneTitles: ['Clean frontend', 'Practical backend', 'Improvement mindset'],
-            milestoneDescriptions: [
-                'Responsive interfaces with modern HTML, CSS and JavaScript.',
-                'Hands-on experience building services and endpoints for academic projects.',
-                'I iterate fast, measure outcomes and apply feedback in every delivery.'
+            descriptions: [
+                '2017-09 - 2019-06 · CESUR, Seville.',
+                '2019-09 - 2021-06 · CESUR, Seville.',
+                '2024 - 2026 · ADAITS.',
+                'Native Spanish, English B2.'
+            ]
+        },
+        work: {
+            dates: [
+                '2023-02 - 2023-05 / 2018-09 - 2019-05',
+                '2020-08 - 2023-01',
+                '2023-04 - 2024-09',
+                '2021-11 - Present'
+            ],
+            titles: [
+                'Leisure Activity Instructor - BOSQUE SUSPENDIDO, Seville',
+                'Leisure Activity Instructor - Universo Parkour, Seville',
+                'Forklift Operator - RHENUS LOGISTICS (EUROFIRMS), Seville',
+                'Waiter - Asador Montequinto, Seville'
+            ],
+            descriptions: [
+                'Work material setup and collection, activity supervision, participant support and contingency planning.',
+                'Sports support and guidance, activity planning, nutrition and feedback, emergency supervision, adaptation support and participation in large-scale projects.',
+                'Machinery control, truck loading/unloading and picking gun usage.',
+                'Table setup and clearing, service for 15-30 person menus, food and drinks service, kitchen cleaning support and menu preparation.'
             ]
         },
         projects: {
@@ -248,22 +292,6 @@ const i18n = {
                 'Final Markup Language project focused on HTML and CSS, clean layout and semantic structure.'
             ],
             codeButton: 'Code'
-        },
-        youtube: {
-            heroTitle: 'Exploring Parkour with Manzano',
-            paragraphs: [
-                'Welcome to my YouTube channel where I share my passion for parkour. Here you will find videos about the parkour we do in Seville and my journey in the world of free movement.',
-                'From basic jumps to advanced moves, documenting my progress and sharing what I learn along the way.'
-            ],
-            visitChannel: 'Visit Channel',
-            cardDescriptions: [
-                'Explore amazing parkour and urban movement videos from Galicia to the world',
-                'Exclusive parkour and free movement content in the city',
-                'My parkour group from Seville, Spain'
-            ],
-            subscribeTitle: 'Join the Community!',
-            subscribeText: 'Subscribe to the channel so you do not miss any new parkour videos',
-            subscribeButton: 'Subscribe'
         },
         contact: {
             heading: 'Let us work together!',
@@ -332,12 +360,14 @@ function setIconTextList(selector, values) {
 }
 
 function updateLanguageToggle() {
-    if (!langToggle) {
+    if (!langToggles.length) {
         return;
     }
     const isEnglish = currentLanguage === 'en';
-    langToggle.textContent = isEnglish ? 'ES' : 'EN';
-    langToggle.setAttribute('aria-label', i18n[currentLanguage].langToggleLabel);
+    langToggles.forEach((toggle) => {
+        toggle.textContent = isEnglish ? 'ES' : 'EN';
+        toggle.setAttribute('aria-label', i18n[currentLanguage].langToggleLabel);
+    });
 }
 
 function applyLanguage(lang) {
@@ -363,17 +393,17 @@ function applyLanguage(lang) {
     setText('.nav-link[href="#home"]', t.nav.home);
     setText('.nav-link[href="#about"]', t.nav.about);
     setText('.nav-link[href="#skills"]', t.nav.skills);
-    setText('.nav-link[href="#journey"]', t.nav.journey);
+    setText('.nav-link[href="#studies"]', t.nav.studies);
+    setText('.nav-link[href="#work"]', t.nav.work);
     setText('.nav-link[href="#projects"]', t.nav.projects);
-    setText('.nav-link[href="#youtube"]', t.nav.youtube);
     setText('.nav-link[href="#contact"]', t.nav.contact);
 
     setText('[data-map-link="home"] .map-label', t.map.home);
     setText('[data-map-link="about"] .map-label', t.map.about);
     setText('[data-map-link="skills"] .map-label', t.map.skills);
-    setText('[data-map-link="journey"] .map-label', t.map.journey);
+    setText('[data-map-link="studies"] .map-label', t.map.studies);
+    setText('[data-map-link="work"] .map-label', t.map.work);
     setText('[data-map-link="projects"] .map-label', t.map.projects);
-    setText('[data-map-link="youtube"] .map-label', t.map.youtube);
     setText('[data-map-link="contact"] .map-label', t.map.contact);
 
     setText('.hero-subtitle', t.heroSubtitle);
@@ -405,7 +435,9 @@ function applyLanguage(lang) {
     setIconTextList('.profile-badge', [t.profileLocation]);
     setTextList('.about-text > p', t.about.paragraphs);
     setText('.about-panel h3', t.about.panelTitle);
-    setIconTextList('.about-points li', t.about.points);
+    setIconTextList('.profile-points li', t.about.points);
+    setText('.about-panel--skills h3', t.about.socialTitle);
+    setIconTextList('.social-skills-list li', t.about.socialItems);
     setIconTextList('.about-focus span', t.about.focus);
 
     const skillCategoryTitles = document.querySelectorAll('.skill-category h3');
@@ -422,25 +454,17 @@ function applyLanguage(lang) {
     });
     setIconTextList('.skill-info-item', t.skills.items);
 
-    setTextList('.timeline-date', t.journey.dates);
-    setTextList('.timeline-card h3', t.journey.titles);
-    setTextList('.timeline-card p', t.journey.descriptions);
-    setTextList('.milestone-card h3', t.journey.milestoneTitles);
-    setTextList('.milestone-card p', t.journey.milestoneDescriptions);
+    setTextList('#studies .milestone-card h3', t.studies.titles);
+    setTextList('#studies .milestone-card p', t.studies.descriptions);
+
+    setTextList('#work .timeline-date', t.work.dates);
+    setTextList('#work .timeline-card h3', t.work.titles);
+    setTextList('#work .timeline-description', t.work.descriptions);
 
     setTextList('.project-badge', t.projects.badges);
     setTextList('.project-content h3', t.projects.titles);
     setTextList('.project-content p', t.projects.descriptions);
     setTextList('.project-links .btn', [t.projects.codeButton, t.projects.codeButton, t.projects.codeButton]);
-
-    setText('.youtube-text h3', t.youtube.heroTitle);
-    setTextList('.youtube-text p', t.youtube.paragraphs);
-    setIconTextList('.youtube-text .btn', [t.youtube.visitChannel]);
-    setTextList('.video-card p', t.youtube.cardDescriptions);
-    setIconTextList('.video-views', [t.youtube.visitChannel, t.youtube.visitChannel, t.youtube.visitChannel]);
-    setText('.subscribe-box h3', t.youtube.subscribeTitle);
-    setText('.subscribe-box p', t.youtube.subscribeText);
-    setIconTextList('.subscribe-box .btn', [t.youtube.subscribeButton]);
 
     setText('.contact-info h3', t.contact.heading);
     setText('.contact-info p', t.contact.description);
@@ -501,16 +525,18 @@ function getCurrentSectionId() {
 }
 
 function updateThemeToggle(theme) {
-    if (!themeToggle) {
+    if (!themeToggles.length) {
         return;
     }
 
     const isLight = theme === 'light';
-    themeToggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
-    themeToggle.setAttribute('aria-label', isLight ? i18n[currentLanguage].themeToggleDark : i18n[currentLanguage].themeToggleLight);
-    themeToggle.innerHTML = isLight
-        ? '<i class="fas fa-moon" aria-hidden="true"></i>'
-        : '<i class="fas fa-sun" aria-hidden="true"></i>';
+    themeToggles.forEach((toggle) => {
+        toggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+        toggle.setAttribute('aria-label', isLight ? i18n[currentLanguage].themeToggleDark : i18n[currentLanguage].themeToggleLight);
+        toggle.innerHTML = isLight
+            ? '<i class="fas fa-moon" aria-hidden="true"></i>'
+            : '<i class="fas fa-sun" aria-hidden="true"></i>';
+    });
 }
 
 function setTheme(theme, persist = true) {
@@ -521,17 +547,19 @@ function setTheme(theme, persist = true) {
     }
 }
 
-if (themeToggle) {
+if (themeToggles.length) {
     const storedTheme = localStorage.getItem('theme');
     const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)');
     const initialTheme = storedTheme || (prefersLight && prefersLight.matches ? 'light' : 'dark');
 
     setTheme(initialTheme, false);
 
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = document.body.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-        const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
-        setTheme(nextTheme);
+    themeToggles.forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+            const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(nextTheme);
+        });
     });
 
     if (!storedTheme && prefersLight) {
@@ -544,10 +572,12 @@ if (themeToggle) {
 const storedLanguage = localStorage.getItem('language');
 setLanguage(storedLanguage || 'es', false);
 
-if (langToggle) {
-    langToggle.addEventListener('click', () => {
-        const nextLanguage = currentLanguage === 'es' ? 'en' : 'es';
-        setLanguage(nextLanguage);
+if (langToggles.length) {
+    langToggles.forEach((toggle) => {
+        toggle.addEventListener('click', () => {
+            const nextLanguage = currentLanguage === 'es' ? 'en' : 'es';
+            setLanguage(nextLanguage);
+        });
     });
 }
 
@@ -611,7 +641,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
     // Add animation classes to elements for scroll reveal
-    const animateElements = document.querySelectorAll('.skill-category, .skill-info-item, .project-card, .about-content, .about-panel, .about-focus, .timeline-item, .milestone-card, .video-card, .subscribe-box, .contact-content, .youtube-hero');
+    const animateElements = document.querySelectorAll('.skill-category, .skill-info-item, .project-card, .about-content, .about-panel, .about-focus, .timeline-item, .milestone-card, .contact-content');
     animateElements.forEach((el, index) => {
         el.classList.add('slide-up');
         if (index < 16) {

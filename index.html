@@ -24,9 +24,9 @@
                 <a href="#home" class="nav-link">Inicio</a>
                 <a href="#about" class="nav-link">Sobre Mí</a>
                 <a href="#skills" class="nav-link">Habilidades</a>
-                <a href="#journey" class="nav-link">Ruta</a>
+                <a href="#studies" class="nav-link">Estudios</a>
+                <a href="#work" class="nav-link">Trabajo</a>
                 <a href="#projects" class="nav-link">Proyectos</a>
-                <a href="#youtube" class="nav-link">Parkour</a>
                 <a href="#contact" class="nav-link">Contacto</a>
             </div>
             <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar a modo claro" aria-pressed="false">
@@ -58,22 +58,30 @@
             <span class="map-dot" aria-hidden="true"></span>
             <span class="map-label">Habilidades</span>
         </a>
-        <a href="#journey" class="map-item" data-map-link="journey">
+        <a href="#studies" class="map-item" data-map-link="studies">
             <span class="map-dot" aria-hidden="true"></span>
-            <span class="map-label">Ruta</span>
+            <span class="map-label">Estudios</span>
+        </a>
+        <a href="#work" class="map-item" data-map-link="work">
+            <span class="map-dot" aria-hidden="true"></span>
+            <span class="map-label">Trabajo</span>
         </a>
         <a href="#projects" class="map-item" data-map-link="projects">
             <span class="map-dot" aria-hidden="true"></span>
             <span class="map-label">Proyectos</span>
         </a>
-        <a href="#youtube" class="map-item" data-map-link="youtube">
-            <span class="map-dot" aria-hidden="true"></span>
-            <span class="map-label">Parkour</span>
-        </a>
         <a href="#contact" class="map-item" data-map-link="contact">
             <span class="map-dot" aria-hidden="true"></span>
             <span class="map-label">Contacto</span>
         </a>
+        <div class="map-controls" aria-label="Controles de interfaz">
+            <button class="theme-toggle" id="map-theme-toggle" aria-label="Cambiar a modo claro" aria-pressed="false">
+                <i class="fas fa-sun" aria-hidden="true"></i>
+            </button>
+            <button class="lang-toggle" id="map-lang-toggle" aria-label="Switch language to English">
+                EN
+            </button>
+        </div>
     </aside>
 
     <main id="main-content">
@@ -125,11 +133,22 @@
                         Fuera del código, me encanta escuchar música (rap, rock y española), ver anime y jugar videojuegos. También juego al pádel y hago parkour.
                     </p>
                     <div class="about-panel">
-                        <h3>Perfil rápido</h3>
-                        <ul class="about-points">
+                        <h3>Perfil resumido</h3>
+                        <ul class="about-points profile-points">
                             <li><i class="fas fa-user-graduate"></i> 2º de DAW, mejorando cada semana con práctica constante.</li>
                             <li><i class="fas fa-sitemap"></i> Me gusta entender arquitectura, lógica y cómo escalan los proyectos.</li>
                             <li><i class="fas fa-users"></i> Buen encaje en equipo, comunicación directa y ganas de aportar.</li>
+                        </ul>
+                    </div>
+                    <div class="about-panel about-panel--skills">
+                        <h3>Social Skills</h3>
+                        <ul class="about-points social-skills-list">
+                            <li><i class="fas fa-people-group"></i> Trabajo en equipo</li>
+                            <li><i class="fas fa-puzzle-piece"></i> Resolución de problemas</li>
+                            <li><i class="fas fa-handshake"></i> Responsabilidad en el equipo</li>
+                            <li><i class="fas fa-comments"></i> Buenas habilidades de comunicación</li>
+                            <li><i class="fas fa-clock"></i> Organización y puntualidad</li>
+                            <li><i class="fas fa-bullseye"></i> Liderazgo</li>
                         </ul>
                     </div>
                     <div class="about-focus">
@@ -181,52 +200,72 @@
         </div>
     </section>
 
-    <!-- Journey Section -->
-    <section id="journey" class="journey">
+    <!-- Studies Section -->
+    <section id="studies" class="journey">
         <div class="container">
-            <h2 class="section-title">Mi Ruta</h2>
-            <div class="journey-layout">
+            <h2 class="section-title">Estudios</h2>
+            <div class="milestones milestones--studies">
+                <article class="milestone-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Grado Medio TECO</h3>
+                    <p>2017-09 - 2019-06 · CESUR, Sevilla.</p>
+                </article>
+                <article class="milestone-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Grado Superior Enseñanza y Animación</h3>
+                    <p>2019-09 - 2021-06 · CESUR, Sevilla.</p>
+                </article>
+                <article class="milestone-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Grado Superior ADAITS Desarrollo de Aplicaciones Web</h3>
+                    <p>2024 - 2026 · ADAITS.</p>
+                </article>
+                <article class="milestone-card">
+                    <i class="fas fa-language"></i>
+                    <h3>Idiomas</h3>
+                    <p>Español nativo, Inglés B2.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="journey">
+        <div class="container">
+            <h2 class="section-title">Trabajo</h2>
+            <div class="journey-layout journey-layout--single">
                 <div class="timeline">
                     <article class="timeline-item">
                         <span class="timeline-dot" aria-hidden="true"></span>
                         <div class="timeline-card">
-                            <p class="timeline-date">2024 - 2026</p>
-                            <h3>2º DAW y proyectos reales</h3>
-                            <p>Construyendo una base sólida en desarrollo web con práctica continua en frontend, backend y despliegue.</p>
+                            <p class="timeline-date">2023-02 - 2023-05 / 2018-09 - 2019-05</p>
+                            <h3>Monitor de tiempo libre - BOSQUE SUSPENDIDO, Sevilla</h3>
+                            <p class="timeline-description">Montura y recogida de material de trabajo, supervisión durante las actividades, apoyo y orientación a participantes y planificación de contingencias.</p>
                         </div>
                     </article>
                     <article class="timeline-item">
                         <span class="timeline-dot" aria-hidden="true"></span>
                         <div class="timeline-card">
-                            <p class="timeline-date">Actualmente</p>
-                            <h3>API y arquitectura por capas</h3>
-                            <p>Mejorando en diseño de APIs REST, validaciones y organización de proyectos más mantenibles.</p>
+                            <p class="timeline-date">2020-08 - 2023-01</p>
+                            <h3>Monitor de tiempo libre - Universo Parkour, Sevilla</h3>
+                            <p class="timeline-description">Orientación y apoyo en etapa deportiva, planificación de actividades, alimentación y retroalimentación, supervisión de emergencias, adaptación a nuevas situaciones y participación en proyectos de gran escala.</p>
                         </div>
                     </article>
                     <article class="timeline-item">
                         <span class="timeline-dot" aria-hidden="true"></span>
                         <div class="timeline-card">
-                            <p class="timeline-date">Siguiente paso</p>
-                            <h3>Primer rol profesional</h3>
-                            <p>Objetivo: entrar en un equipo donde aportar desde el día uno y seguir creciendo técnicamente.</p>
+                            <p class="timeline-date">2023-04 - 2024-09</p>
+                            <h3>Carretillero - RHENUS LOGISTICS (EUROFIRMS), Sevilla</h3>
+                            <p class="timeline-description">Control de maquinaria, carga y descarga de camiones y uso de pistola de picking.</p>
                         </div>
                     </article>
-                </div>
-                <div class="milestones">
-                    <article class="milestone-card">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3>Frontend limpio</h3>
-                        <p>Interfaces responsivas con HTML, CSS y JavaScript moderno.</p>
-                    </article>
-                    <article class="milestone-card">
-                        <i class="fas fa-server"></i>
-                        <h3>Backend práctico</h3>
-                        <p>Experiencia montando servicios y endpoints para proyectos académicos.</p>
-                    </article>
-                    <article class="milestone-card">
-                        <i class="fas fa-rocket"></i>
-                        <h3>Enfoque en mejora</h3>
-                        <p>Itero rápido, mido resultados y aplico feedback en cada entrega.</p>
+                    <article class="timeline-item">
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <div class="timeline-card">
+                            <p class="timeline-date">2021-11 - Actualidad</p>
+                            <h3>Camarero - Asador Montequinto, Sevilla</h3>
+                            <p class="timeline-description">Colocación y recogida de mesas, servicio de menús para 15-30 personas, bebidas y comidas en mesa, apoyo de limpieza en cocina y preparación de menús.</p>
+                        </div>
                     </article>
                 </div>
             </div>
@@ -295,60 +334,6 @@
                             <a href="https://github.com/JavierManzano-30/LenguajeDeMarca-Final" target="_blank" class="btn btn-outline">Código</a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- YouTube Section -->
-    <section id="youtube" class="youtube-section">
-        <div class="container">
-            <h2 class="section-title">Mi Canal de Parkour</h2>
-            <div class="youtube-content">
-                <div class="youtube-hero">
-                    <div class="youtube-text">
-                        <h3>Explorando el Parkour con Manzano</h3>
-                        <p>
-                            Bienvenido a mi canal de YouTube donde comparto mi pasión por el parkour. En este espacio encontrarás videos sobre el parkour que hacemos en Sevilla y mi viaje en el mundo del movimiento libre.
-                        </p>
-                        <p>
-                            Desde saltos básicos hasta movimientos avanzados, documentando mi progreso y compartiendo lo que aprendo en el camino.
-                        </p>
-                        <a href="https://www.youtube.com/@manzanojiseidento3229" target="_blank" class="btn btn-primary">
-                            <i class="fab fa-youtube"></i> Visitar Canal
-                        </a>
-                    </div>
-                    <figure class="youtube-placeholder">
-                        <img src="img/Youtube.png" alt="Mi Canal de Parkour" loading="lazy">
-                    </figure>
-                </div>
-                
-                <div class="videos-grid">
-                    <a href="https://www.youtube.com/@GalizianUrbanProject" target="_blank" class="video-card">
-                        <h4>Galizian Urban Project</h4>
-                        <p>Explora increíbles vídeos de parkour y movimiento urbano desde Galicia al mundo</p>
-                        <span class="video-views"><i class="fab fa-youtube"></i> Visitar Canal</span>
-                    </a>
-                    
-                    <a href="https://www.youtube.com/@SteelVideoblogGup" target="_blank" class="video-card">
-                        <h4>Steel Videoblog</h4>
-                        <p>Contenido inédito de parkour y movimiento libre en la ciudad</p>
-                        <span class="video-views"><i class="fab fa-youtube"></i> Visitar Canal</span>
-                    </a>
-                    
-                    <a href="https://www.youtube.com/@GUS-pk" target="_blank" class="video-card">
-                        <h4>GUS Parkour</h4>
-                        <p>Mi grupo de parkour de Sevilla, España</p>
-                        <span class="video-views"><i class="fab fa-youtube"></i> Visitar Canal</span>
-                    </a>
-                </div>
-
-                <div class="subscribe-box">
-                    <h3>Únete a la Comunidad!</h3>
-                    <p>Suscríbete al canal para no perderte ningún video nuevo de parkour</p>
-                    <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0&list=RDxvFZjo5PgG0&start_radio=1" target="_blank" class="btn btn-primary">
-                        <i class="fab fa-youtube"></i> Suscribirse
-                    </a>
                 </div>
             </div>
         </div>
